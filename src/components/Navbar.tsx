@@ -1,4 +1,4 @@
-import logo from './assets/chords-over-freatboard-logo.svg';
+import logo from '../assets/chords-over-freatboard-logo.svg';
 
 export default function Navbar() {
 	return <>

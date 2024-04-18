@@ -1,5 +1,6 @@
 import './App.css'
-import Navbar from './Navbar'
+import KeySelector from './components/KeySelector'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <h1 className='text-3xl font-bold mt-10'>
           Scales and Chords
         </h1>
+        <KeySelector />
       </div>
     </div>
   )
