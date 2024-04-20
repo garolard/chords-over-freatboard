@@ -1,4 +1,3 @@
-import './App.css'
 import ChordSelector from './components/ChordSelector'
 import KeySelector from './components/KeySelector'
 import Navbar from './components/Navbar'
