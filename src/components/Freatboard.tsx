@@ -1,4 +1,3 @@
-import React from 'react';
 import { getScaleFromRoot } from '../helpers/ChordsHelper';
 import { Chord } from '../types';
 
@@ -34,7 +33,7 @@ type FreatboardNoteProps = {
 	note: string;
 	chordNotes: string[];
 };
-function FreatboardNote({ note, chordNotes, ...props }: FreatboardNoteProps) {
+function FreatboardNote({ note, chordNotes }: FreatboardNoteProps) {
 	const noteGradeOnChord = chordNotes.indexOf(note);
 	let bgColor = '';
 	if (noteGradeOnChord === 0) {
