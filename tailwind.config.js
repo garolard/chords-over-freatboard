@@ -19,6 +19,9 @@ export default {
       fontFamily: {
         sans: ['Space Grotesk', 'sans-serif'],
       },
+      fontSize: {
+        'xs': '.75rem',
+      }
     },
   },
   plugins: [],
