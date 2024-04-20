@@ -1,4 +1,4 @@
-import { ValidQueryParams } from "../types";
+import { Chord, ValidQueryParams } from "../types";
 
 type Props = {
 	selectedKey: string;
@@ -7,29 +7,52 @@ type Props = {
 	setQueryParams: (params: Partial<ValidQueryParams>) => void;
 }
 export default function ChordSelector({ selectedKey, selectedScale, selectedChord, setQueryParams }: Props) {
-	getChordsFor(selectedKey, selectedScale);
+	const availableChords = getChordsFor(selectedKey, selectedScale);
 
 	return <div className="flex flex-col">
 	<p className="mt-4 text-xl">Select a chord:</p>
 	<div className='flex flex-row'>
-	{/* {availableChords.map((chord) => (
+	{availableChords.map((chord) => (
 		<button
-			key={chord}
-			className={`p-2 px-4 m-1 text-white rounded-xl ${selectedKey === key ? 'bg-blue-500' : 'bg-gray-500'}`}
-			onClick={() => setQueryParams({ 'chord': chord })}
+			key={chord.name}
+			className={`p-2 px-4 m-1 border-2 rounded-xl ${selectedChord === chord.name ? 'border-blue-500' : 'border-gray-medium'}`}
+			onClick={() => setQueryParams({ 'chord': chord.name })}
 		>
-			{chord}
+			{chord.name}
 		</button>
-	))} */}
+	))}
 	</div>
 </div>;
 }
 
-function getChordsFor(selectedKey: string, selectedScale: string): void {
+function getChordsFor(selectedKey: string, selectedScale: string): Chord[] {
 	const scale = getScaleFromRoot(selectedKey, availableScalesIntervals[selectedScale]);
-	const chords = getChordsForScale(scale);
-	console.log(scale);
-	console.log(chords);
+	const chordSignatures = gradesForScales[selectedScale].split(', ');
+	
+	const chords = scale.map((note, idx) => {
+		const chordSignature = chordSignatures[idx % chordSignatures.length];
+		
+		let intervals: number[] = [];
+		switch (chordSignature) {
+			case 'maj':
+				intervals = majorChordIntervals;
+				break;
+			case 'min':
+				intervals = minorChordIntervals;
+				break;
+			case 'dim':
+				intervals = diminishedChordIntervals;
+				break;
+		}
+
+		const indexOfRoot = availableNotes.indexOf(note);
+		const chord = [note, availableNotes[(indexOfRoot + intervals[1]) % availableNotes.length], availableNotes[(indexOfRoot + intervals[2]) % availableNotes.length]];
+		return {
+			'name': `${note}${chordSignature}`,
+			'notes': chord,
+		}
+	});
+	return chords;
 }
 
 const availableNotes = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B'];
@@ -37,18 +60,19 @@ const availableNotes = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/
 const majorScaleIntervals = [2, 2, 1, 2, 2, 2];
 const minorScaleIntervals = [2, 1, 2, 2, 1, 2];
 
-const majChordIntervals = [0, 4, 7];
-const minChordIntervals = [0, 3, 7];
-
 const availableScalesIntervals: { [scale: string]: number[] } = {
 	'major': majorScaleIntervals,
 	'minor': minorScaleIntervals
 };
 
-const availableChordsIntervals: { [chord: string]: number[] } = {
-	'maj': majChordIntervals,
-	'min': minChordIntervals
+const gradesForScales: { [grade: string]: string } = {
+	'major': 'maj, min, min, maj, maj, min, dim',
+	'minor': 'min, dim, maj, min, min, maj, maj'
 };
+
+const majorChordIntervals = [0, 4, 7];
+const minorChordIntervals = [0, 3, 7];
+const diminishedChordIntervals = [0, 3, 6];
 
 function getScaleFromRoot(root: string, intervals: number[]): string[] {
 	const scale = [root];
@@ -58,18 +82,4 @@ function getScaleFromRoot(root: string, intervals: number[]): string[] {
 		scale.push(availableNotes[currentNoteIdx % availableNotes.length]);
 	}
 	return scale;
-}
-
-function getChordsForScale(scale: string[]) {
-	const chords = [];
-	for (let chordDef of Object.entries(availableChordsIntervals)) {
-		const notes = chordDef[1].map((interval) => availableNotes[interval]);
-
-		if (notes.some((note) => !scale.includes(note))) {
-			continue;
-		}
-		
-		chords.push({ name: `${notes[0]}${chordDef[0]}`, notes: notes });
-	}	
-	return chords;
 }

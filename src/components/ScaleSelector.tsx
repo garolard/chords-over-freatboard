@@ -13,7 +13,7 @@ export default function KeySelector({ selectedScale, setQueryParams }: Props) {
 		{availableScales.map((scale) => (
 			<button
 				key={scale}
-				className={`p-2 px-4 m-1 text-white rounded-xl ${selectedScale === scale.toLocaleLowerCase() ? 'bg-blue-500' : 'bg-gray-500'}`}
+				className={`p-2 px-4 m-1 border-2 rounded-xl ${selectedScale === scale.toLocaleLowerCase() ? 'border-blue-500' : 'border-gray-medium'}`}
 				onClick={() => setQueryParams({ 'scale': scale.toLocaleLowerCase() })}
 			>
 				{scale}

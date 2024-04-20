@@ -3,3 +3,8 @@ export type ValidQueryParams = {
 	'scale': string;
 	'chord': string;
 };
+
+export type Chord = {
+	'name': string;
+	'notes': string[];
+};

@@ -13,7 +13,7 @@ export default function KeySelector({ selectedKey, setQueryParams }: Props) {
 		{availableKeys.map((key) => (
 			<button
 				key={key}
-				className={`p-2 px-4 m-1 text-white rounded-xl ${selectedKey === key ? 'bg-blue-500' : 'bg-gray-500'}`}
+				className={`p-2 px-4 m-1 border-2 rounded-xl ${selectedKey === key ? 'border-blue-500' : 'border-gray-medium'}`}
 				onClick={() => setQueryParams({ 'key': key })}
 			>
 				{key}
