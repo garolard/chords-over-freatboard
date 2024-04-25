@@ -9,7 +9,7 @@ type Props = {
 export default function KeySelector({ selectedScale, setQueryParams }: Props) {
 	return <div className="flex flex-col">
 		<p className="mt-4 text-xl">Select a scale:</p>
-		<div className='flex flex-row'>
+		<div className='flex flex-row flex-wrap'>
 		{availableScales.map((scale) => (
 			<button
 				key={scale}

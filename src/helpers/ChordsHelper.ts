@@ -24,6 +24,7 @@ export function getChordsFor(selectedKey: string, selectedScale: string): Chord[
 		const chord = [note, availableNotes[(indexOfRoot + intervals[1]) % availableNotes.length], availableNotes[(indexOfRoot + intervals[2]) % availableNotes.length]];
 		return {
 			'name': `${note}${chordSignature}`,
+			'signature': chordSignature,
 			'notes': chord,
 		}
 	});
@@ -38,6 +39,27 @@ export function getScaleFromRoot(root: string, intervals: number[]): string[] {
 		scale.push(availableNotes[currentNoteIdx % availableNotes.length]);
 	}
 	return scale;
+}
+
+export const getAvailableNotes = () => availableNotes;
+
+export const getIntervalName = (interval: number) => {
+	switch (interval) {
+		case 1:
+			return 'Second minor';
+		case 2:
+			return 'Second major';
+		case 3:
+			return 'Third minor';
+		case 4:
+			return 'Third major';
+		case 5:
+			return 'Fourth perfect';
+		case 6:
+			return 'Fifth diminished';
+		case 7:
+			return 'Fifth perfect';
+	}
 }
 
 const availableNotes = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B'];

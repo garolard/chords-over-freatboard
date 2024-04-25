@@ -9,7 +9,7 @@ type Props = {
 export default function KeySelector({ selectedKey, setQueryParams }: Props) {
 	return <div className="flex flex-col">
 		<p className="mt-4 text-xl">Select a key:</p>
-		<div className='flex flex-row'>
+		<div className='flex flex-row flex-wrap'>
 		{availableKeys.map((key) => (
 			<button
 				key={key}

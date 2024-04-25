@@ -6,5 +6,6 @@ export type ValidQueryParams = {
 
 export type Chord = {
 	'name': string;
+	'signature': string;
 	'notes': string[];
 };

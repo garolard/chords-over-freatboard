@@ -14,7 +14,8 @@ export default {
       colors: {
         'gray-dark': '#121717',
         'gray-medium': '#DBE3E5',
-        'gray-light': '#F0F2F5',      
+        'gray-light': '#F0F2F5',
+        'surface': '#fefcfa', 
       },
       fontFamily: {
         sans: ['Space Grotesk', 'sans-serif'],
@@ -24,6 +25,6 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 }
 

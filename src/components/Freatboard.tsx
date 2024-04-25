@@ -3,34 +3,34 @@ import { Chord } from '../types';
 
 const naturalIntervals = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
-type FreatboardProps = {
+type FretboardProps = {
 	selectedChord: Chord;
 };
-export default function Freatboard({ selectedChord }: FreatboardProps) {
+export default function Fretboard({ selectedChord }: FretboardProps) {
 	return <div className="w-full grid grid-cols-12 grid-rows-6 gap-2 my-32">
 		{getScaleFromRoot('E', naturalIntervals).map((note, i) => (
-			<FreatboardNote key={i} note={note} chordNotes={selectedChord.notes} />
+			<FretboardNote key={`E${note}${i}`} note={note} chordNotes={selectedChord.notes} />
 		))}
 		{getScaleFromRoot('B', naturalIntervals).map((note, i) => (
-			<FreatboardNote key={i} note={note} chordNotes={selectedChord.notes} />
+			<FretboardNote key={`B${note}${i}`} note={note} chordNotes={selectedChord.notes} />
 		))}	
 		{getScaleFromRoot('G', naturalIntervals).map((note, i) => (
-			<FreatboardNote key={i} note={note} chordNotes={selectedChord.notes} />
+			<FretboardNote key={`G${note}${i}`} note={note} chordNotes={selectedChord.notes} />
 		))}
 		{getScaleFromRoot('D', naturalIntervals).map((note, i) => (
-			<FreatboardNote key={i} note={note} chordNotes={selectedChord.notes} />
+			<FretboardNote key={`D${note}${i}`} note={note} chordNotes={selectedChord.notes} />
 		))}
 		{getScaleFromRoot('A', naturalIntervals).map((note, i) => (
-			<FreatboardNote key={i} note={note} chordNotes={selectedChord.notes} />
+			<FretboardNote key={`A${note}${i}`} note={note} chordNotes={selectedChord.notes} />
 		))}
 		{getScaleFromRoot('E', naturalIntervals).map((note, i) => (
-			<FreatboardNote key={i} note={note} chordNotes={selectedChord.notes} />
+			<FretboardNote key={`E2${note}${i}`} note={note} chordNotes={selectedChord.notes} />
 		))}
 		{[...Array(12)].map((_, i) => {
 			if (i === 0) {
-				return <p className='flex justify-center mt-3'>Open</p>;
+				return <p key={`fret-${i}`} className='flex justify-center mt-3'>Open</p>;
 			} else if (i === 3 || i === 5 || i === 7 || i === 9) {
-				return <p className='flex justify-center mt-3'>{i}</p>;
+				return <p key={`fret-${i}`} className='flex justify-center mt-3'>{i}</p>;
 			} else {
 				return <div></div>;
 			}
@@ -38,11 +38,11 @@ export default function Freatboard({ selectedChord }: FreatboardProps) {
 	</div>;
 }
 
-type FreatboardNoteProps = {
+type FretboardNoteProps = {
 	note: string;
 	chordNotes: string[];
 };
-function FreatboardNote({ note, chordNotes }: FreatboardNoteProps) {
+function FretboardNote({ note, chordNotes }: FretboardNoteProps) {
 	const noteGradeOnChord = chordNotes.indexOf(note);
 	let bgColor = '';
 	if (noteGradeOnChord === 0) {

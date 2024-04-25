@@ -4,7 +4,8 @@ import Navbar from './components/Navbar'
 import ScaleSelector from './components/ScaleSelector'
 import useQueryParams from './hooks/useQueryParamsHook'
 import * as Chords from './helpers/ChordsHelper';
-import Freatboard from './components/Freatboard'
+import Fretboard from './components/Freatboard'
+import ChordSummary from './components/ChordSummary'
 
 function App() {
   const [queryParams, setQueryParams] = useQueryParams({ key: 'C', scale: 'major' });
@@ -14,14 +15,25 @@ function App() {
   return (
     <div className='w-full flex flex-col'>
       <Navbar />
-      <div className='w-2/3 mx-auto'>
-        <h1 className='text-3xl font-bold mt-10'>
-          Scales and Chords
-        </h1>
-        <KeySelector selectedKey={queryParams.get('key')!} setQueryParams={setQueryParams} />
-        <ScaleSelector selectedScale={queryParams.get('scale')!} setQueryParams={setQueryParams} />
-        <ChordSelector selectedChord={queryParams.get('chord') || availableChords[0].name} setQueryParams={setQueryParams} availableChords={availableChords} />
-        <Freatboard selectedChord={selectedChord}/>
+      <div className='w-2/3 mx-auto mt-10'>
+        <div className='flex'>
+          <div className='w-1/2'>
+            <h1 className='text-3xl font-bold mt-10'>
+              Scales and Chords
+            </h1>
+            <KeySelector selectedKey={queryParams.get('key')!} setQueryParams={setQueryParams} />
+            <ScaleSelector selectedScale={queryParams.get('scale')!} setQueryParams={setQueryParams} />
+            <ChordSelector selectedChord={queryParams.get('chord') || availableChords[0].name} setQueryParams={setQueryParams} availableChords={availableChords} />
+          </div>
+          <div className='divider divider-horizontal'></div>
+          <div>
+            <h1 className='text-3xl font-bold mt-10'>
+              Chord Summary
+            </h1>
+            <ChordSummary selectedChord={selectedChord} />
+          </div>
+        </div>
+        <Fretboard selectedChord={selectedChord}/>
       </div>
     </div>
   )

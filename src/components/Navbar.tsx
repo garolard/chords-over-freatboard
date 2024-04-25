@@ -1,18 +1,15 @@
 import logo from '../assets/chords-over-freatboard-logo.svg';
 
 export default function Navbar() {
-	return <>
-		<nav className='py-2 px-6 border-b flex flex-row'>
-			<div className='flex flex-row items-center'>
-				<img src={logo} alt='logo' width={16} height={16}/>
-				<p className='font-bold ml-4'>Chords Over The Fretboard</p>
+	return <div className='navbar border-b sticky left-0 top-0 bg-surface'>
+		<div className='navbar-start px-4'>
+			<img src={logo} alt='logo' width={16} height={16}/>
+			<p className='font-bold ml-4'>Chords Over The Fretboard</p>
+		</div>
+		<div className='navbar-end'>
+			<div className='btn'>
+				<p>Help</p>
 			</div>
-			<div className='flex-grow'></div>
-			<div>
-				<div className='bg-gray-light rounded-xl px-4 py-2'>
-					<p>Help</p>
-				</div>
-			</div>
-		</nav>
-	</>;
+		</div>
+	</div>;
 }
